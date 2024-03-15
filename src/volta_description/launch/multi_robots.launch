@@ -1,0 +1,22 @@
+<launch>
+    <!-- Launch the empty world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch" />
+
+    <!-- Define a list of robot descriptions -->
+    <arg name="robot_descriptions" default="robot1.yaml,robot2.yaml,robot3.yaml" />
+
+    <!-- Iterate over the list of robot descriptions -->
+    <group ns="robots">
+        <foreach item="robot_description" in="$(arg robot_descriptions)">
+            <!-- Load the URDF description of the robot -->
+            <rosparam file="$(find my_robot_description)/urdf/$(arg robot_description)" command="load" />
+
+            <!-- Extract the robot name from the file name -->
+            <param name="robot_name" command="basename -s .yaml $(arg robot_description)" />
+
+            <!-- Spawn the robot at position (x, y, z) -->
+            <node name="spawn_$(arg robot_name)" pkg="gazebo_ros" type="spawn_model" output="screen"
+                  args="-urdf -model $(arg robot_name) -x $(arg x) -y $(arg y) -z $(arg z) -param /robots/$(arg robot_name)" />
+        </foreach>
+    </group>
+</launch>

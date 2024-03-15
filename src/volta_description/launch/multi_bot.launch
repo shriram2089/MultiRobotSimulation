@@ -1,0 +1,20 @@
+<launch>
+    <!-- Include an empty world launch file -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch"/>   
+
+    <!-- Define URDF paths -->
+    <arg name="urdf_bot1" default="$(find volta_description)/urdf/volta.xacro"/>
+    <arg name="urdf_bot2" default="$(find volta_description)/urdf/volta.xacro"/>
+
+    <!-- Load URDF descriptions -->
+    <param name="robot_description1" command="$(find xacro)/xacro --inorder $(arg urdf_bot1)"/> 
+    <param name="robot_description2" command="$(find xacro)/xacro --inorder $(arg urdf_bot2)"/> 
+
+    <!-- Spawn the first robot -->
+    <node name="spawn_model1" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+      args="-urdf -model volta_robot1 -x 1 -y 1 -z 0 -param robot_description1"/>   
+
+    <!-- Spawn the second robot -->
+    <node name="spawn_model2" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+      args="-urdf -model volta_robot2 -x 0 -y 1 -z 0 -param robot_description2"/>  
+</launch>

@@ -1,0 +1,6 @@
+
+<launch>
+
+    <node name="my_python_node" pkg="volta_description" type="multi_launch.py" output="screen"/>
+
+</launch>

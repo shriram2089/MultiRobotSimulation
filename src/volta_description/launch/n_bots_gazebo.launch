@@ -1,0 +1,18 @@
+<launch>
+    <!-- Include the empty world launch file -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+
+    <arg name="num_bots" default="3"/> 
+
+    
+    <foreach item="bot_index" in="$(arg num_bots)" ns="volta" ns-sep="/">
+    
+        <arg name="urdf_bot" default="$(find volta_description)/urdf/volta.xacro"/>
+
+        <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg urdf_bot)"/> 
+
+      
+        <node name="spawn_model_$(arg bot_index)" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+            args="-urdf -model volta_robot_$(arg bot_index) -x $(arg bot_index) -y 1 -z 0 -param robot_description"/>  
+    </foreach>
+</launch>

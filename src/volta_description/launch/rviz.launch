@@ -1,0 +1,8 @@
+<launch>
+    <arg name="model" default="$(find volta_description)/urdf/volta.xacro"/>
+
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)"/>  
+    
+    <!-- Start RViz -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find volta_description)/rviz_params/urdf.rviz"/>
+</launch>

@@ -1,0 +1,31 @@
+<launch>
+     
+    <include file="$(find gazebo_ros)/launch/empty_world.launch"/>   
+
+    <arg name="urdf_bot" default="$(find volta_description)/urdf/volta.xacro"/>
+    
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg urdf_bot)"/> 
+
+     
+
+
+      
+    <!-- <node name="wait_for_gazebo" pkg="gazebo_ros" type="gzclient" args="-wait"/>   -->
+
+    <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+      args="-urdf -model volta_robot -x 1 -y 1 -z 0 -param robot_description"/>   
+
+    <node name="spawn_model_1" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+      args="-urdf -model volta_robot_3 -x 2 -y 2 -z 0 -param robot_description"/>  
+
+    <node name="spawn_model_2" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+      args="-urdf -model volta_robot_5 -x 1 -y -1 -z 0 -param robot_description"/>  
+
+    <node name="spawn_model_3" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+      args="-urdf -model volta_robot_6 -x 2 -y -2 -z 0 -param robot_description"/>  
+
+
+</launch>
+
+
+

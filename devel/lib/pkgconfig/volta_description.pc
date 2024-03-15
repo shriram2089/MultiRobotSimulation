@@ -1,0 +1,8 @@
+prefix=/home/zeus_007/rob_ws/devel
+
+Name: volta_description
+Description: Description of volta_description
+Version: 1.1.1
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
